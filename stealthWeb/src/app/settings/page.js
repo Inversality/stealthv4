@@ -5,7 +5,7 @@ import { getUserData } from "../utils/UserDataService";
 import { signOut } from 'firebase/auth';
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-
+import ProfileComponent from '../components/settings/profilecomponent';
 export default function Settings() {
   const [user, setUser] = useState(null);
   const [userData, setUserData] = useState(null);
@@ -23,7 +23,7 @@ export default function Settings() {
   const [errorMessage, setErrorMessage] = useState('')
   const [emailAvailable, setEmailAvailable] = useState(true)
  const [userin, setUserin] = useState(null);
-  
+  const [settingsView, setSettingsView] = useState("Profiles");
 
   const handleLogout = async () => {
     await signOut(auth);
@@ -77,10 +77,10 @@ export default function Settings() {
             <h1 className="text-[18px] font-bold mb-[77px]">
               User Settings
             </h1>
-            <h1 className="font-medium text-18px text-white">
+            <h1 className="font-medium text-18px text-white" onClick = {() => setSettingsView("MyAcc")}>
               My Account
             </h1>
-            <h1 className="font-medium text-18px mt-[47px] text-[#C3C3C3]">
+            <h1 className="font-medium text-18px mt-[47px] text-[#C3C3C3]" onClick = {() => setSettingsView("Profiles")}>
               Profiles
             </h1>
             <h1 className="font-medium text-18px mt-[47px] mb-[78px] text-[#C3C3C3]">
@@ -103,7 +103,9 @@ export default function Settings() {
             </h1>
           </div>
         </div>
-
+        {settingsView == "MyAcc" ? 
+        (<> 
+        
         <div className="flex flex-col flex justify-center items-center w-[100%]">
           <h1 className="font-bold font-bold text-[35px]">
             My Account
@@ -201,6 +203,60 @@ export default function Settings() {
             </div>
           </div>
         </div>
+        
+        </>) : null}
+       
+        {settingsView == "Profiles" ? 
+        (<> 
+          <div className='w-[100%] h-[100vh] flex justify-center'>
+            <div className = "flex flex-col self-center ">
+              <div className = "flex flex-col font-semibold text-[20px]">
+                <h1 className = "mb-[15px]"> Add accounts to your profile</h1>
+                <h1 className = "text-[14.29px] mb-[13px] text-[#9EA2A9] font-normal">This information will not be shared outside of Angen without your permission, and is used in accordance with Angen's</h1>
+                <h1 className = "mb-[27px] text-[13.58px] font-semibold text-[#128FD5]">Privacy Policy.</h1>
+                <div className = "flex flex-row"> 
+                  <div className='w-[69.32px] h-[69.32px] bg-[#313339] mr-[12px] rounded-[6px]'>
+                    <Image src = ""/>
+                  </div>
+                  <div className='w-[69.32px] h-[69.32px] bg-[#313339] mr-[12px] rounded-[6px]'>
+                    <Image src = ""/>
+                  </div>
+                  <div className='w-[69.32px] h-[69.32px] bg-[#313339] mr-[12px] rounded-[6px]'>
+                    <Image src = ""/>
+                  </div>
+                  <div className='w-[69.32px] h-[69.32px] bg-[#313339] mr-[12px] rounded-[6px]'>
+                    <Image src = ""/>
+                  </div>
+                  <div className='w-[69.32px] h-[69.32px] bg-[#313339] mr-[12px] rounded-[6px]'>
+                    <Image src = ""/>
+                  </div>
+                  <div className='w-[69.32px] h-[69.32px] bg-[#313339] mr-[12px] rounded-[6px]'>
+                    <Image src = ""/>
+                  </div>
+                  <div className='w-[69.32px] h-[69.32px] bg-[#313339] mr-[12px] rounded-[6px]'>
+                    <Image src = ""/>
+                  </div>
+                  <div className='w-[69.32px] h-[69.32px] bg-[#313339] mr-[12px] rounded-[6px]'>
+                    <Image src = ""/>
+                  </div>
+                  <div className='w-[69.32px] h-[69.32px] bg-[#313339] mr-[12px] rounded-[6px]'>
+                    <Image src = ""/>
+                  </div>
+                  <div className='w-[69.32px] h-[69.32px] bg-[#313339] mr-[12px] rounded-[6px]'>
+                    <Image src = ""/>
+                  </div>
+                  <div className='w-[69.32px] h-[69.32px] bg-[#313339] mr-[12px] rounded-[6px]'>
+                    <Image src = ""/>
+                  </div>
+                </div>
+                <ProfileComponent platform = "Spotify" name = "conrad" />
+                <ProfileComponent platform = "Battle.net" name = "ascensuri#2861" />
+              </div>
+            </div>
+          </div>
+        
+        </>
+        ) : null}
       </div>
     </main>
   );
